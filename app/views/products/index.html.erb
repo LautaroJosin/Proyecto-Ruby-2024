@@ -1,1 +1,8 @@
 <h1> Listado de productos </h1>
+
+<p> Cantidad de productos : <%= @products.count %> </p>
+
+<% @products.each do |product| %>
+    <p> <%= product.name %> - <%= product.price %> </p>
+
+<%end%>
