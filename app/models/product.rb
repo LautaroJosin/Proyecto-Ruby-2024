@@ -4,7 +4,7 @@ class Product < ApplicationRecord
 
     # enum size: { S: 's', M: 'm', L: 'l', XL: 'xl', XXL: 'xxl'}
 
-    validates :title , presence: true
+    validates :name , presence: true
     validates :price , presence: true
     validates :stock , presence: true
     validates :category, presence: true
@@ -13,8 +13,8 @@ class Product < ApplicationRecord
 
     private
     def must_have_at_least_one_image
-        if images.empty?
-        errors.add(:images, 'must have at least one image')
+        unless images.attached?
+            errors.add(:images, 'must have at least one image')
         end
     end
     

@@ -24,17 +24,23 @@
 
     <div>
         <%= form.label :size %>
-        <%= form.select :size, ["S", "M", "L"] %>
+        <%= form.select :size, ["S", "M", "L"], include_blank: true  %>
     </div>
 
     <div>
         <%= form.label :color %>
-        <%= form.select :color, ["Red", "Blue", "Green"] %>
+        <%= form.select :color, ["Red", "Blue", "Green"], include_blank: true  %>
     </div>
 
     <div>
         <%= form.label :category %>
-        <%= form.select :category_id, Category.order(:name).map { |category| [category.name, category.id] }, include_blank: true %>
+        <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: true } %>
+    </div>
+
+    
+    <div>
+        <%= form.label :images %>
+        <%= form.file_field :images, multiple: true %>
     </div>
 
     <%= form.submit %>
