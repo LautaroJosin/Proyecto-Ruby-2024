@@ -11,10 +11,7 @@
 require 'faker'
 
 10.times do
-    Product.create(
-      name: Faker::Commerce.product_name,
-      description: Faker::Lorem.paragraph,
-      price: Faker::Commerce.price(range: 10..100.0),
-      stock: rand(1..50),
+    Category.create(
+      name: Faker::Commerce.department(max: 1)
     )
 end
