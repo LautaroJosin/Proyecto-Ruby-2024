@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   get '/products', to: 'products#index'
+  get '/products/new', to: 'products#new', as: 'new_product'
 end
