@@ -14,10 +14,10 @@ class ProductsController < ApplicationController
         # pp @product
         
         if @product.save
-          redirect_to products_path
+          redirect_to products_path, notice: 'Product saved correctly'
         else
-            #render :new, status: :unprocessable_entity
-            puts @product.errors.full_messages
+            render :new, status: :unprocessable_entity
+            #puts @product.errors.full_messages
         end
     end
 

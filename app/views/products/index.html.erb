@@ -2,7 +2,33 @@
 
 <p> Cantidad de productos : <%= @products.count %> </p>
 
-<% @products.each do |product| %>
-    <p> <%= product.name %> - <%= product.price %> </p>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Color</th>
+                <th>Size</th>
+                <th>Stock</th>
+                <th>Images</th>
+            </tr>
+        </thead>
 
-<%end%>
+        <tbody>
+            <% @products.each do |product| %>
+            <tr>
+                <td><%= product.name %></td>
+                <td><%= product.price %></td>
+                <td><%= product.description %></td>
+                <td><%= product.category.name %></td>
+                <td><%= product.color %></td>
+                <td><%= product.size %></td>
+                <td><%= product.stock %></td>
+                <td><%= image_tag product.images.first, size: "100x100" %></td>
+                
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
