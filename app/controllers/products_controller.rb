@@ -6,6 +6,9 @@ class ProductsController < ApplicationController
 
     def show
         @product = Product.find(params[:id])
+        if @product.nil?
+            redirect_to products_path, notice: 'Product not found', status: :not_found
+        end
     end
 
     def new
@@ -27,14 +30,13 @@ class ProductsController < ApplicationController
       @product = Product.find(params[:id])
     end
 
-    # Fixme: This method is not working
+    # Fixme: This method is not updating the images of the product
     def update
         @product = Product.find(params[:id])
 
-        if @product.update(product_params)
+        if @product.update(product_params.except(:images))
             redirect_to products_path, notice: 'Product updated correctly'
         else
-            puts @product.errors.full_messages
             render :edit, status: :unprocessable_entity
         end
     end

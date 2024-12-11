@@ -37,13 +37,8 @@
         <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: true } %>
     </div>
 
-    <!-- Modificar formulario -->
+    <!-- Modify form to add and delete images from the product -->
     
-    <div>
-        <%= form.label :images %>
-        <%= form.file_field :images, multiple: true %>
-    </div>
-
     <%= form.submit %>
 
 <% end %>
