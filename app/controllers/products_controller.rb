@@ -4,6 +4,10 @@ class ProductsController < ApplicationController
         @products = Product.all
     end
 
+    def show
+        @product = Product.find(params[:id])
+    end
+
     def new
         @product = Product.new
     end
@@ -12,7 +16,7 @@ class ProductsController < ApplicationController
         @product = Product.new(product_params)
 
         # pp @product
-        
+
         if @product.save
           redirect_to products_path, notice: 'Product saved correctly'
         else
@@ -21,8 +25,24 @@ class ProductsController < ApplicationController
         end
     end
 
+    def edit
+      @product = Product.find(params[:id])
+    end
+
+    def update
+        @product = Product.find(params[:id])
+
+        if @product.update(product_params)
+            redirect_to products_path, notice: 'Product updated correctly'
+        else
+            puts @product.errors.full_messages
+            render :edit, status: :unprocessable_entity
+        end
+    end
+
     private 
     def product_params
       params.require(:product).permit(:name, :description, :price, :stock, :category_id, :size, :color, images: [] )
     end
+    
 end
