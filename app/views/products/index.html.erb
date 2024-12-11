@@ -1,6 +1,6 @@
-<h1> Listado de productos </h1>
+<h1> Products's list </h1>
 
-<p> Cantidad de productos : <%= @products.count %> </p>
+<p> Products's count : <%= @products.count %> </p>
 
     <table>
         <thead>
@@ -19,7 +19,7 @@
         <tbody>
             <% @products.each do |product| %>
             <tr>
-                <td><%= product.name %></td>
+                <td><%= link_to product.name, product_path(product) %></td>
                 <td><%= product.price %></td>
                 <td><%= product.description %></td>
                 <td><%= product.category.name %></td>

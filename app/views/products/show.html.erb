@@ -1,0 +1,51 @@
+<h1> Product <%= @product.name %> </h1>
+
+<div>
+    <div>
+    <strong>Name:</strong>
+    <span><%= @product.name %></span>
+  </div>
+
+  <div>
+    <strong>Price:</strong>
+    <span><%= @product.price %></span>
+  </div>
+
+  <div>
+    <strong>Description:</strong>
+    <span><%= @product.description %></span>
+  </div>
+
+  <div>
+    <strong>Category:</strong>
+    <span><%= @product.category.name %></span>
+  </div>
+
+  <div>
+    <strong>Color:</strong>
+    <span><%= @product.color %></span>
+  </div>
+
+  <div>
+    <strong>Size:</strong>
+    <span><%= @product.size %></span>
+  </div>
+
+  <div>
+    <strong>Stock:</strong>
+    <span><%= @product.stock %></span>
+  </div>
+
+  <div>
+    <strong>Images:</strong>
+    <div>
+        <% @product.images.each do |image| %>
+            <%= image_tag image, size: "100x100" %>
+        <% end %>
+    </div>
+  </div>
+
+
+  <%= link_to 'Edit product', edit_product_path(@product) %> 
+
+</div>
