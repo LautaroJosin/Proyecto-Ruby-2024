@@ -14,9 +14,7 @@ class ProductsController < ApplicationController
 
     def create
         @product = Product.new(product_params)
-
         # pp @product
-
         if @product.save
           redirect_to products_path, notice: 'Product saved correctly'
         else
@@ -29,6 +27,7 @@ class ProductsController < ApplicationController
       @product = Product.find(params[:id])
     end
 
+    # Fixme: This method is not working
     def update
         @product = Product.find(params[:id])
 
@@ -38,6 +37,12 @@ class ProductsController < ApplicationController
             puts @product.errors.full_messages
             render :edit, status: :unprocessable_entity
         end
+    end
+
+    def destroy
+        @product = Product.find(params[:id])
+        @product.destroy
+        redirect_to products_path, notice: 'Product deleted correctly', status: :see_other
     end
 
     private 
