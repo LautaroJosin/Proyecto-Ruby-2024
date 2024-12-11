@@ -1,6 +1,12 @@
 <h1> Products's list </h1>
 
+<div>
+    <%= link_to 'Add new product', new_product_path %>
+</div>
+
 <p> Products's count : <%= @products.count %> </p>
+
+<% if @products.count > 0%>
 
     <table>
         <thead>
@@ -26,9 +32,18 @@
                 <td><%= product.color %></td>
                 <td><%= product.size %></td>
                 <td><%= product.stock %></td>
-                <td><%= image_tag product.images.first, size: "100x100" %></td>
+                <% if product.images.attached? %>
+                    <td><%= image_tag product.images.first, size: "100x100" %></td>
+                <% end %>
+                
                 
             </tr>
             <% end %>
         </tbody>
     </table>
+
+<% else %>
+
+<p> There are no products to show </p>
+
+<% end %>
