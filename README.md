@@ -6,6 +6,7 @@ Este proyecto es un el trabajo final desarrollado para la materia Taller de Tecn
 
 - **Ruby**: 3.3.5
 - **Rails**: 8.0.0
+- **Sqlite3**
 
 ## Instalación
 
