@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   # post '/products', to: 'products#create'
   # get '/products/:id/edit', to: 'products#edit', as: :edit_product
   resources :products
+
+
+  match '*unmatched', to: 'application#content_not_found', via: :all
 end

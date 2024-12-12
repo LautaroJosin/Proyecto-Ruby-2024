@@ -5,8 +5,12 @@ class ProductsController < ApplicationController
     end
 
     def show
-        @product = Product.find(params[:id])
+        @product = Product.find_by(id: params[:id])
+        if @product.nil?
+            content_not_found
+        end
     end
+    
 
     def new
         @product = Product.new
