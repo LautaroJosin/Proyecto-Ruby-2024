@@ -13,7 +13,7 @@ Este proyecto es un el trabajo final desarrollado para la materia Taller de Tecn
 1. **Clona el repositorio**:
 
     ```sh
-    git clone git@github.com:LautaroJosin/Proyecto-Ruby-2024.git 
+    git clone https://github.com/LautaroJosin/Proyecto-Ruby-2024.git
     ```
 
 2. **Instala las dependencias**:
