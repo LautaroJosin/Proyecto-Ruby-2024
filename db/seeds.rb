@@ -10,8 +10,30 @@
 
 require 'faker'
 
+
 10.times do
-    Category.create(
+    Category.create!(
       name: Faker::Commerce.department(max: 1)
     )
 end
+
+# 10.times do
+#   Product.create!(
+#     name: Faker::Commerce.product_name,
+#     description: Faker::Lorem.sentence(word_count: 10),
+#     price: Faker::Commerce.price(range: 10..100.0),
+#     stock: rand(1..50),
+#     category_id: rand(1..10),
+#     size: %w[S M L XL].sample,
+#     color: Faker::Color.color_name
+#   )
+
+#   product.image.attach(
+#     io: URI.open("https://via.placeholder.com/300"), # URL de una imagen simulada
+#     filename: "placeholder.jpg",
+#     content_type: "image/jpg"
+#   )
+
+# end
+
+puts "10 categories created successfully!"
