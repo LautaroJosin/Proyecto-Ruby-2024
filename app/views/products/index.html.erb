@@ -1,49 +1,47 @@
-<h1> Products's list </h1>
+<div class="container mt-4">
+  <h1 class="text-center text-primary mb-4">Products List</h1>
 
-<div>
-    <%= link_to 'Add new product', new_product_path %>
-</div>
+  <div class="text-end mb-3">
+    <%= link_to 'Add new product', new_product_path, class: 'btn btn-success' %>
+  </div>
 
-<p> Products's count : <%= @products.count %> </p>
+  <p class="mb-4">Products count: <%= @products.count %></p>
 
-<% if @products.count > 0%>
+  <% if @products.count > 0 %>
+    <table class="table table-striped table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Color</th>
+          <th>Size</th>
+          <th>Stock</th>
+          <th>Images</th>
+        </tr>
+      </thead>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Color</th>
-                <th>Size</th>
-                <th>Stock</th>
-                <th>Images</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <% @products.each do |product| %>
-            <tr>
-                <td><%= link_to product.name, product_path(product) %></td>
-                <td><%= product.price %></td>
-                <td><%= product.description %></td>
-                <td><%= product.category.name %></td>
-                <td><%= product.color %></td>
-                <td><%= product.size %></td>
-                <td><%= product.stock %></td>
-                <% if product.images.attached? %>
-                    <td><%= image_tag product.images.first, size: "100x100" %></td>
-                <% end %>
-                
-                
-            </tr>
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= link_to product.name, product_path(product), class: 'text-decoration-none' %></td>
+            <td><%= number_to_currency(product.price) %></td>
+            <td><%= product.description.truncate(50) %></td>
+            <td><%= product.category.name %></td>
+            <td><%= product.color %></td>
+            <td><%= product.size %></td>
+            <td><%= product.stock %></td>
+            <% if product.images.attached? %>
+              <td><%= image_tag product.images.first, size: "100x100", class: 'img-thumbnail' %></td>
+            <% else %>
+              <td>No Image</td>
             <% end %>
-        </tbody>
+          </tr>
+        <% end %>
+      </tbody>
     </table>
-
-<% else %>
-
-<p> There are no products to show </p>
-
-<% end %>
+  <% else %>
+    <p class="text-center text-danger">There are no products to show</p>
+  <% end %>
+</div>
