@@ -33,14 +33,17 @@ class ProductsController < ApplicationController
 
     # Fixme: This method is not updating the images of the product
     def update
-        @product = Product.find(params[:id])
-
-        if @product.update(product_params.except(:images))
+        @product = Product.find_by(id: params[:id])
+        
+        if @product.update(product_params)
             redirect_to products_path, notice: 'Product updated correctly'
         else
+            flash.now[:alert] = 'An error has ocurred when updating the product'
             render :edit, status: :unprocessable_entity
+            return
         end
     end
+
 
     def destroy
         @product = Product.find(params[:id])
@@ -50,7 +53,7 @@ class ProductsController < ApplicationController
 
     private 
     def product_params
-      params.require(:product).permit(:name, :description, :price, :stock, :category_id, :size, :color, images: [] )
+      params.require(:product).permit(:name, :description, :price, :stock, :category_id, :size, :color, images: [])
     end
     
 end

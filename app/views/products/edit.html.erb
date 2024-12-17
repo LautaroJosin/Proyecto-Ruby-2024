@@ -37,8 +37,51 @@
         <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: true } %>
     </div>
 
-    <!-- Modify form to add and delete images from the product -->
-    
+    <!-- Section to add and remove images from product -->
+
+    <% @product.images.each do |image| %>
+        <%= form.hidden_field :images, multiple: true, value: image.signed_id %>
+    <% end %>
+
+    <div>
+        <%= form.label 'Images to add' %>
+        <%= form.file_field :images, multiple: true %>
+
+    </div>
+
+<!-- Deleting images from product incomplete
+    <div>
+        <%= form.label 'Images to remove' %>
+        <% @product.images.each do |image| %>
+            <div>
+                <%= image_tag image, size: "100x100" %> <%= check_box_tag :image, image.signed_id, false, id: "checkbox_#{image.signed_id}" %>
+            </div>
+        <% end %>
+    </div>
+-->
+
     <%= form.submit %>
 
+
 <% end %>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener("change", function() {
+
+            const hiddenInput = document.getElementById(`hidden_input_${checkbox.value}`);
+
+            if (checkbox.checked) {
+                
+            } else {
+                
+            }
+        });
+    });
+});
+
+</script>
