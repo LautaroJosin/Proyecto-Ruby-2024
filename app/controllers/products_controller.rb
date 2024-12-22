@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
-
     def index
         @products = Product.all
     end
@@ -10,7 +9,6 @@ class ProductsController < ApplicationController
             content_not_found
         end
     end
-    
 
     def new
         @product = Product.new
@@ -20,10 +18,10 @@ class ProductsController < ApplicationController
         @product = Product.new(product_params)
         # pp @product
         if @product.save
-          redirect_to products_path, notice: 'Product saved correctly'
+          redirect_to products_path, notice: "Product saved correctly"
         else
             render :new, status: :unprocessable_entity
-            #puts @product.errors.full_messages
+          # puts @product.errors.full_messages
         end
     end
 
@@ -34,13 +32,12 @@ class ProductsController < ApplicationController
     # Fixme: This method is not updating the images of the product
     def update
         @product = Product.find_by(id: params[:id])
-        
         if @product.update(product_params)
-            redirect_to products_path, notice: 'Product updated correctly'
+            redirect_to products_path, notice: "Product updated correctly"
         else
-            flash.now[:alert] = 'An error has ocurred when updating the product'
+            flash.now[:alert] = "An error has ocurred when updating the product"
             render :edit, status: :unprocessable_entity
-            return
+            nil
         end
     end
 
@@ -48,12 +45,11 @@ class ProductsController < ApplicationController
     def destroy
         @product = Product.find(params[:id])
         @product.destroy
-        redirect_to products_path, notice: 'Product deleted correctly', status: :see_other
+        redirect_to products_path, notice: "Product deleted correctly", status: :see_other
     end
 
-    private 
+    private
     def product_params
-      params.require(:product).permit(:name, :description, :price, :stock, :category_id, :size, :color, images: [])
+      params.require(:product).permit(:name, :description, :price, :stock, :category_id, :remove_image, :size, :color, images: [])
     end
-    
 end
