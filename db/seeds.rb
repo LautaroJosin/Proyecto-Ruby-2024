@@ -17,6 +17,16 @@ require 'faker'
     )
 end
 
+puts "10 categories created successfully!"
+
+roles = %w[Administrador Gerente Empleado]
+
+roles.each do |role_name|
+  Role.find_or_create_by(name: role_name)
+end
+
+puts "Roles created: #{Role.pluck(:name).join(', ')}"
+
 # 10.times do
 #   Product.create!(
 #     name: Faker::Commerce.product_name,
@@ -35,5 +45,3 @@ end
 #   )
 
 # end
-
-puts "10 categories created successfully!"
