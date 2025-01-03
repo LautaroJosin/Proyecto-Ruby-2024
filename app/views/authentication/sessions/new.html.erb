@@ -1,0 +1,19 @@
+<h1>Login</h1>
+
+
+<%= form_with(url: sessions_path) do |form| %>
+
+  <div>
+    <%= form.label :login %>
+    <%= form.text_field :login, placeholder: "Enter your user's email or user's name" %>
+  </div>
+
+  <div>
+    <%= form.label :password %>
+    <%= form.password_field :password, placeholder: "Enter password" %>
+  </div>
+
+
+  <%= form.submit "Login", class: "btn btn-primary mt-3" %>
+
+<% end %>

@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   resources :products
   resources :users
 
-  # ruta para crear roles
-  # ruta para crear categories
+  namespace :authentication, path: "", as: "" do
+    resources :sessions, only: [ :new, :create, :destroy ]
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
