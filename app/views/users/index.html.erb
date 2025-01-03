@@ -29,8 +29,21 @@
             <td><%= user.join_date.strftime("%B %d, %Y") %></td>
             <td><%= user.role.name %></td>
             <td>
+              <div>
               <%= link_to 'Edit', edit_user_path(user), class: 'btn btn-primary btn-sm me-2' %>
+              </div>
+
+              <div>
+                <%= form_with model: user do |form| %> 
+                  <%= form.hidden_field :is_active, value: !user.is_active %>
+                  <%= form.submit user.is_active ? "Deactivate" : "Activate", class: 'btn btn-primary btn-sm me-2' %>
+                <% end %>
+              </div>
+
+              <div>
               <%= button_to "delete", { controller: :users, action: 'destroy', id: user.id }, method: :delete,  class: 'btn btn-danger btn-sm'%>
+              </div>
+              
             </td>
           </tr>
         <% end %>
