@@ -2,11 +2,6 @@ Rails.application.routes.draw do
   root "pages#home"
   resources :categories
   resources :products
-  resources :users
-
-  namespace :authentication, path: "", as: "" do
-    resources :sessions, only: [ :new, :create, :destroy ]
-  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
