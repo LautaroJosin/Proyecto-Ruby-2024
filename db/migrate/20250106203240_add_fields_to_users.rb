@@ -6,5 +6,6 @@ class AddFieldsToUsers < ActiveRecord::Migration[8.0]
     add_column :users, :phone, :string
     add_column :users, :joined_at, :datetime
     add_column :users, :is_active, :boolean, default: true
+    add_column :users, :role_int, :integer, default: 2
   end
 end
