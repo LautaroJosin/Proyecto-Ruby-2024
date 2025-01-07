@@ -17,4 +17,8 @@ class User < ApplicationRecord
   def deactivate!
     update(is_active: false, password: Devise.friendly_token[0, 6])
   end
+
+  def activate!
+    update(is_active: true, password: 'new-password')
+  end
 end

@@ -33,6 +33,12 @@ class UsersController < ApplicationController
     redirect_to users_path, notice: "User deactivated"
   end
 
+  def activate
+    @user = User.find(params[:id])
+    @user.activate!
+    redirect_to users_path, notice: "User activated"
+  end
+
   private
   def user_params
     params.require(:user).permit(:username, :email, :phone, :password, :password_confirmation, :role_int, :is_active)
