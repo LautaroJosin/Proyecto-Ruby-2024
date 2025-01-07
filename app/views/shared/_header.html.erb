@@ -21,26 +21,28 @@
         <% end %>
       </ul>
 
-    <% if user_signed_in?%>
-
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: 'btn btn-primary' %>
-        </li>
-      </ul>
-
-    <% else %>
-
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <%= link_to 'Log in', new_user_session_path, class: 'btn btn-primary' %>
-        </li>
-      </ul>
-
-    <% end %>
+      <% if user_signed_in? %>
+        <ul class="navbar-nav ms-auto">
+          <!-- Botón para "Profile" -->
+          <li class="nav-item">
+            <%= link_to 'Profile', user_path(current_user), class: 'btn btn-info m-2' %>
+          </li>
+          <!-- Botón para "Log out" -->
+          <li class="nav-item">
+            <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: 'btn btn-danger m-2' %>
+          </li>
+        </ul>
+      <% else %>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <%= link_to 'Log in', new_user_session_path, class: 'btn btn-primary' %>
+          </li>
+        </ul>
+      <% end %>
 
     </div>
   </nav>
 
   <hr>
 </header>
+
