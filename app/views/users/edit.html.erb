@@ -18,8 +18,7 @@
   </div>
 
   <div>
-    <%= form.label :role %>
-    <%= form.select :role, ["Admin", "Editor", "Viewer"], include_blank: true %>
+    <%= link_to 'Change password' , '#' , class: 'btn btn-primary'%>
   </div>
 
   <%= form.submit 'Save Changes', class: 'btn btn-primary mt-3' %>
