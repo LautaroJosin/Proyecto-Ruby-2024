@@ -1,1 +1,27 @@
-Esta es la vista del formulario de edicion de un user
+<h1>Edit User</h1>
+
+<%= form_with model: @user do |form| %>
+
+  <div>
+    <%= form.label :username %>
+    <%= form.text_field :username %>
+  </div>
+
+  <div>
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :phone %>
+    <%= form.telephone_field :phone %>
+  </div>
+
+  <div>
+    <%= form.label :role %>
+    <%= form.select :role, ["Admin", "Editor", "Viewer"], include_blank: true %>
+  </div>
+
+  <%= form.submit 'Save Changes', class: 'btn btn-primary mt-3' %>
+
+<% end %>

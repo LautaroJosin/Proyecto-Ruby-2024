@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   enum :role_int, admin: 0, manager: 1, employee: 2
   # before_create :set_joined_at
-  before_update :check_if_active_changed
+  # before_update :check_if_active_changed
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
