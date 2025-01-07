@@ -14,9 +14,11 @@
           <%= link_to 'View products', products_path, class: 'nav-link' %>
         </li>
 
+        <% if user_signed_in? %>
         <li class="nav-item">
           <%= link_to 'View users', '/users', class: 'nav-link' %>
         </li>
+        <% end %>
       </ul>
 
     <% if user_signed_in?%>

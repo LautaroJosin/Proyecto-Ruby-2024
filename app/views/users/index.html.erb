@@ -33,12 +33,11 @@
             <td>
             <div class="d-flex">
               <% if user.is_active %>
-                <%= button_to 'Deactivate', '/users/' + user.id.to_s + '/deactivate', method: :patch, class: 'btn btn-danger btn-sm me-2' %>
+                <%= button_to 'Deactivate', deactivate_user_path(user), method: :patch, class: 'btn btn-danger btn-sm me-2' %>
               <% else %>
-                <%= link_to 'Activate', '#', class: 'btn btn-success btn-sm me-2' %>
+                <%= button_to 'Activate', '#', method: :patch, class: 'btn btn-success btn-sm me-2' %>
               <% end %>
-              <%= link_to 'Edit', '#', class: 'btn btn-primary btn-sm' %>
-              <%= link_to 'Delete', '#', class: 'btn btn-danger btn-sm' %>
+              <%= link_to 'Edit', edit_user_path(user), class: 'btn btn-primary btn-sm' %>
             </div>
             </td>
         <% end %>

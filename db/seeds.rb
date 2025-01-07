@@ -19,13 +19,16 @@ end
 
 puts "10 categories created successfully!"
 
-roles = %w[Administrador Gerente Empleado]
+User.create!(
+  email: "lau@gmail.com",
+  username: "lau",
+  password: "123456",
+  phone: "1234567890",
+  role_int: "admin",
+  is_active: true
+)
 
-roles.each do |role_name|
-  Role.find_or_create_by(name: role_name)
-end
-
-puts "Roles created: #{Role.pluck(:name).join(', ')}"
+puts "Admin user created successfully!"
 
 # 10.times do
 #   Product.create!(

@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   root "pages#home"
 
-  devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
+  devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords" }
 
-  get "/users", to: "users#index"
-  get "/users/edit", to: "users#edit"
-  patch "/users/:id/update", to: "users#update", as: "users_update"
-  patch "/users/:id/deactivate", to: "users#deactivate"
+  resources :users, only: [ :index, :edit, :update ] do
+    member do
+      patch :deactivate
+    end
+  end
 
   resources :categories
 
