@@ -21,8 +21,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def deactivate
+    @user = User.find(params[:id])
+    @user.deactivate!
+    redirect_to users_path, notice: "User deactivated"
+  end
+
   private
   def user_params
-    params.require(:user).permit(:username, :email, :phone, :password, :password_confirmation, :role_int)
+    params.require(:user).permit(:username, :email, :phone, :password, :password_confirmation, :role_int, :is_active)
   end
 end

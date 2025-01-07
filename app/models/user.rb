@@ -12,4 +12,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :phone, presence: true
   validates :role_int, inclusion: { in: role_ints.keys.map { |role| role.to_s }, message: "%{value} Role invalido." }
+
+  def deactivate!
+    update(is_active: false, password: Devise.friendly_token[0, 6])
+  end
 end

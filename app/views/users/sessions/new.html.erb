@@ -24,8 +24,4 @@
 <% end %>
 
 
-<% if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <div>
-    <%= link_to "Sign up", new_registration_path(resource_name) %><br />
-  </div>
-<% end %>
+<%= render "users/shared/links" %>

@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   get "/users", to: "users#index"
   get "/users/edit", to: "users#edit"
-  patch "/users/:id/update", to: "users#update"
+  patch "/users/:id/update", to: "users#update", as: "users_update"
+  patch "/users/:id/deactivate", to: "users#deactivate"
 
   resources :categories
 

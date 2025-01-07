@@ -25,19 +25,22 @@
             <td><%= user.role_int %></td>
             <td>
                 <% if user.is_active %>
-                    <span class="badge bg-success">Yes</span>
+                    <span>Yes</span>
                 <% else %>
-                    <span class="badge bg-danger">No</span>
+                    <span>No</span>
                 <% end %>
             </td>
             <td>
-                <% if user.is_active %>
-                    <%= link_to 'Deactivate', '#', class: 'btn btn-danger btn-sm' %>
-                <% else %>
-                    <%= link_to 'Activate', '#', class: 'btn btn-success btn-sm' %> 
-                <% end %>
+            <div class="d-flex">
+              <% if user.is_active %>
+                <%= button_to 'Deactivate', '/users/' + user.id.to_s + '/deactivate', method: :patch, class: 'btn btn-danger btn-sm me-2' %>
+              <% else %>
+                <%= link_to 'Activate', '#', class: 'btn btn-success btn-sm me-2' %>
+              <% end %>
+              <%= link_to 'Edit', '#', class: 'btn btn-primary btn-sm' %>
+              <%= link_to 'Delete', '#', class: 'btn btn-danger btn-sm' %>
+            </div>
             </td>
-          </tr>
         <% end %>
       </tbody>
     </table>
