@@ -47,8 +47,16 @@
     </div>
 
     <div class="col-md-12 mb-3 text-center">
-      <%= link_to 'Edit product', edit_product_path(@product), class: 'btn btn-warning m-2' %>
-      <%= button_to "Delete product", { controller: :products, action: 'destroy', id: @product.id }, method: :delete,  class: 'btn btn-danger btn-sm'%>
+
+      <% if can? :edit, @product %>
+        <%= link_to 'Edit product', edit_product_path(@product), class: 'btn btn-warning m-2' %>
+      <% end %>
+
+      <% if can? :destroy, @product %>
+        <%= button_to "Delete product", { controller: :products, action: 'destroy', id: @product.id }, method: :delete,  class: 'btn btn-danger btn-sm'%>
+      <% end %>
+      
     </div>
+
   </div>
 </div>

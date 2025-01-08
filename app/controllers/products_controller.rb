@@ -12,16 +12,16 @@ class ProductsController < ApplicationController
 
     def new
         @product = Product.new
+        authorize! :create, @product
     end
 
     def create
         @product = Product.new(product_params)
-        # pp @product
+        authorize! :create, @product
         if @product.save
           redirect_to products_path, notice: "Product saved correctly"
         else
             render :new, status: :unprocessable_entity
-          # puts @product.errors.full_messages
         end
     end
 

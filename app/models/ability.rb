@@ -5,7 +5,8 @@ class Ability
 
   def initialize(user)
     if user.nil? # user is a guest
-      cannot :read, User
+      cannot :manage, User
+      cannot :manage, Product
       can :read, Product
 
     else
