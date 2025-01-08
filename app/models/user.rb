@@ -19,6 +19,18 @@ class User < ApplicationRecord
   end
 
   def activate!
-    update(is_active: true, password: 'new-password')
+    update(is_active: true, password: "new-password")
+  end
+
+  def is_admin?
+    role_int == "admin"
+  end
+
+  def is_manager?
+    role_int == "manager"
+  end
+
+  def is_employee?
+    role_int == "employee"
   end
 end

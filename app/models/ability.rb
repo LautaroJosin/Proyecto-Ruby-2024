@@ -4,28 +4,24 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    p user
-
-    if user.nil?
-
-      p "User no esta logueado"
+    if user.nil? # user is a guest
       cannot :read, User
       can :read, Product
 
     else
 
       if user.is_admin?
-        # p "User es admin"
         can :manage, :all
 
       elsif user.is_manager?
-        # p "User es manager"
         can :manage, Product
-        can :read, User
-        can :update, User, { role_int: "employee" }
+        can :manage, User
+        cannot :update, User, { role_int: "admin" }
+        cannot :create, User, { role_int: "admin" }
 
       elsif user.is_employee?
-        p "User es employee"
+        can :manage, Product
+        cannot :manage, User
       end
     end
   end
