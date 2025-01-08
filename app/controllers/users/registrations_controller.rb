@@ -3,7 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-  skip_before_action :require_no_authentication, only: [:new, :create]
+  skip_before_action :require_no_authentication, only: [ :new, :create ]
 
   # GET /resource/sign_up
   # def new
@@ -59,8 +59,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     @user = User.new(user_params)
+    authorize! :create, @user
     if @user.save
-      redirect_to root_path, notice: "User created"
+      redirect_to users_path, notice: "User created"
     else
       flash[:alert] = @user.errors.full_messages.join(", ")
       render :new

@@ -13,12 +13,12 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    @current_user=current_user
+    authorize! :edit, @user
   end
 
   def update
     @user = User.find(params[:id])
-
+    authorize! :update, @user
     if @user.update(user_params)
       redirect_to users_path, notice: "User updated"
     else
