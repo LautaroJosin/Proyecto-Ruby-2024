@@ -17,7 +17,8 @@ require 'faker'
     )
 end
 
-puts "10 categories created successfully!"
+puts "Categories created successfully!"
+
 
 User.create!(
   email: "lau@gmail.com",
@@ -28,23 +29,34 @@ User.create!(
   is_active: true
 )
 
-puts "Admin user created successfully!"
+User.create!(
+  email: "empleado@gmail.com",
+  username: "Empleado",
+  password: "123456",
+  phone: "1234567890",
+  role_int: "employee",
+  is_active: true
+)
 
-# 10.times do
-#   Product.create!(
-#     name: Faker::Commerce.product_name,
-#     description: Faker::Lorem.sentence(word_count: 10),
-#     price: Faker::Commerce.price(range: 10..100.0),
-#     stock: rand(1..50),
-#     category_id: rand(1..10),
-#     size: %w[S M L XL].sample,
-#     color: Faker::Color.color_name
-#   )
+User.create!(
+  email: "gerente@gmail.com",
+  username: "Gerente",
+  password: "123456",
+  phone: "1234567890",
+  role_int: "manager",
+  is_active: true
+)
 
-#   product.image.attach(
-#     io: URI.open("https://via.placeholder.com/300"), # URL de una imagen simulada
-#     filename: "placeholder.jpg",
-#     content_type: "image/jpg"
-#   )
+puts "Users created successfully!"
 
-# end
+
+10.times do
+  Client.create!(
+    name: Faker::Name.first_name,
+    lastname: Faker::Name.last_name,
+    dni: Faker::IdNumber.spanish_citizen_number,
+    phone: Faker::PhoneNumber.cell_phone
+  )
+end
+
+puts "Clients created successfully!"
