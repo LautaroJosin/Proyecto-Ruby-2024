@@ -1,0 +1,128 @@
+<script>
+
+function addClientFields() {
+   
+}
+    
+
+
+</script>
+
+
+<h1 class="text-center my-4">Add New Sale</h1>
+
+<%= form_with model: @sale, local: true, class: "container" do |form| %>
+
+  <!-- Product's List Section -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5>Product's List</h5>
+    </div>
+
+    <div id='products-container' class="card-body">
+
+      <%= form.fields_for :product_sale do |item| %>
+
+        <div>
+
+          <!-- Product Selection -->
+          <div>
+            <%= item.label :product_id, "Product", class: "form-label" %>
+            <%= item.collection_select :product_id, Product.all, :id, :name, { include_blank: true }, class: "input-field" %>
+          </div>
+
+          <!-- Quantity -->
+          <div>
+            <%= item.label :quantity, "Quantity", class: "form-label" %>
+            <%= item.number_field :quantity, step: 1, min: 1, class: "input-field" %>
+          </div>
+        </div>
+
+        <!-- Checkbox to delete product -->
+        <div class="form-check mb-3">
+          <%= item.check_box :_destroy, class: "form-check-input" %>
+          <%= item.label :_destroy, "Remove Product", class: "form-check-label" %>
+        </div>
+
+      <% end %>
+    </div>
+
+    <div class="m-2">
+        <button type="button" class="btn btn-primary" onclick="addProductFields()">Add product</button>
+    </div>
+    
+  </div>
+
+  <!-- Employee Section -->
+  <div class="card mb-4">
+
+    <div class="card-header">
+      <h5>Employee</h5>
+    </div>
+    
+    <div class="card-body">
+      <div class="mb-3">
+        <%= form.label :user_id, "Employee", class: "form-label" %>
+        <%= form.collection_select :user_id, User.all, :id, :username, { include_blank: true }, class: "form-select" %>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Client Section -->
+  <div class="card mb-4">
+
+    <div class="card-header">
+      <h5>Client</h5>
+    </div>
+
+    <div class="card-body">
+
+      <div class="mb-3">
+        <%= form.label :client_id, "Client", class: "form-label" %>
+        <%= form.collection_select :client_id, Client.all, :id, :name, { include_blank: true }, { class: "form-select" , id: "" } %>
+      </div>
+
+      <button type="button" id="add-client-button" class="btn btn-primary mb-3" onclick="showNewClientFields()">Add New Client</button>
+
+      <div id="new-client-fields" style="display: none;">
+
+        <div class="row">
+
+          <div class="col-md-6 mb-3">
+            <%= form.label :name, "First Name", class: "form-label" %>
+            <%= form.text_field :name, class: 'form-control' %>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <%= form.label :lastname, "Last Name", class: "form-label" %>
+            <%= form.text_field :lastname, class: 'form-control' %>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-6 mb-3">
+            <%= form.label :dni, "DNI", class: "form-label" %>
+            <%= form.text_field :dni, class: 'form-control' %>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <%= form.label :phone, "Phone", class: "form-label" %>
+            <%= form.text_field :phone, class: 'form-control' %>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Submit Button -->
+  <div class="text-center">
+    <%= form.submit "Save Sale", class: "btn btn-success" %>
+  </div>
+
+<% end %>
+
