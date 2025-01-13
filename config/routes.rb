@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   resources :product_sales
 
   # Client routes
-  resources :clients, only: [ :new, :create ]
+  resources :clients, only: [ :index, :new, :create, :destroy ]
 
   # Category and product routes
   resources :categories

@@ -1,4 +1,7 @@
 class ClientsController < ApplicationController
+  def index
+    @clients = Client.all
+  end
   def new
     @client = Client.new
   end
@@ -11,6 +14,13 @@ class ClientsController < ApplicationController
       pp @client.errors.full_messages
       render :new
     end
+  end
+
+  def destroy
+    @client = Client.find(params[:id])
+    @client.destroy
+    flash[:notice] = "Client was successfully deleted"
+    redirect_to clients_path
   end
 
   private
