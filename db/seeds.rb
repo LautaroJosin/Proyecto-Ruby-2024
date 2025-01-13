@@ -11,10 +11,25 @@
 require 'faker'
 
 
-10.times do
-    Category.create!(
-      name: Faker::Commerce.department(max: 1)
-    )
+categories = [
+  "Ropa Deportiva - Camisetas",
+  "Ropa Deportiva - Pantalones",
+  "Calzado Deportivo - Zapatillas de Running",
+  "Ropa Deportiva - Chaquetas",
+  "Accesorios - Gorros",
+  "Ropa Deportiva - Shorts",
+  "Ropa Deportiva - Mallas",
+  "Ropa Deportiva - Sudaderas",
+  "Accesorios - Guantes",
+  "Accesorios - Calcetines",
+  "Accesorios - Mochilas",
+  "Calzado Deportivo - Botines de Fútbol"
+]
+
+categories.each do |category_name|
+  Category.create!(
+    name: category_name
+  )
 end
 
 puts "Categories created successfully!"
