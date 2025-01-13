@@ -63,7 +63,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user.save
       redirect_to users_path, notice: "User created"
     else
-      flash[:alert] = @user.errors.full_messages.join(", ")
+      flash.now[:alert] = @user.errors.full_messages.join(", ")
       render :new
     end
   end

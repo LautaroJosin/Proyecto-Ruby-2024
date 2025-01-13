@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to users_path, notice: "User updated"
     else
-      flash[:alert] = @user.errors.full_messages.join(", ")
+      flash.now[:alert] = @user.errors.full_messages.join(", ")
       render :edit
     end
   end
