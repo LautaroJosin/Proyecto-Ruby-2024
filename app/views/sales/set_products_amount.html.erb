@@ -1,7 +1,6 @@
 <p> Please, enter the number of products you want to include into the sale </p>
 <%= form_with url: '/sales/set_products_amount', method: :post do |form| %>
   <div class="mb-3">
-    <%= form.label :products_amount, "Number of Products", class: "form-label" %>
     <%= form.number_field :products_amount, min: 1, class: "form-control", value: @product_count %>
   </div>
 

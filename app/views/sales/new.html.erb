@@ -1,7 +1,10 @@
 <script>
 
 function addClientFields() {
-   
+   var clientFields = document.getElementById('new-client-fields');
+    if (clientFields) {
+        clientFields.style.display = 'block';
+    }
 }
     
 
@@ -46,10 +49,6 @@ function addClientFields() {
 
       <% end %>
     </div>
-
-    <div class="m-2">
-        <button type="button" class="btn btn-primary" onclick="addProductFields()">Add product</button>
-    </div>
     
   </div>
 
@@ -83,7 +82,7 @@ function addClientFields() {
         <%= form.collection_select :client_id, Client.all, :id, :name, { include_blank: true }, { class: "form-select" , id: "" } %>
       </div>
 
-      <button type="button" id="add-client-button" class="btn btn-primary mb-3" onclick="showNewClientFields()">Add New Client</button>
+      <button type="button" id="add-client-button" class="btn btn-primary mb-3" onclick="addClientFields()">Add New Client</button>
 
       <div id="new-client-fields" style="display: none;">
 
@@ -122,6 +121,7 @@ function addClientFields() {
   <!-- Submit Button -->
   <div class="text-center">
     <%= form.submit "Save Sale", class: "btn btn-success" %>
+    <button type="button" class="btn btn-secondary" onclick="window.location.href='<%= sales_path %>'">Cancel</button>
   </div>
 
 <% end %>
