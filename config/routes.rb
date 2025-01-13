@@ -31,9 +31,8 @@ Rails.application.routes.draw do
   resources :clients, only: [ :index, :new, :create, :destroy ]
 
   # Category and product routes
-  resources :categories
-
   resources :products
+  resources :categories, only: [ :index, :new, :create, :destroy ]
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
