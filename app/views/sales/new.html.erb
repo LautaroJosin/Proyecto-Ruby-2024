@@ -1,17 +1,3 @@
-<script>
-
-function addClientFields() {
-   var clientFields = document.getElementById('new-client-fields');
-    if (clientFields) {
-        clientFields.style.display = 'block';
-    }
-}
-    
-
-
-</script>
-
-
 <h1 class="text-center my-4">Add New Sale</h1>
 
 <%= form_with model: @sale, local: true, class: "container" do |form| %>
@@ -82,38 +68,7 @@ function addClientFields() {
         <%= form.collection_select :client_id, Client.all, :id, :name, { include_blank: true }, { class: "form-select" , id: "" } %>
       </div>
 
-      <button type="button" id="add-client-button" class="btn btn-primary mb-3" onclick="addClientFields()">Add New Client</button>
-
-      <div id="new-client-fields" style="display: none;">
-
-        <div class="row">
-
-          <div class="col-md-6 mb-3">
-            <%= form.label :name, "First Name", class: "form-label" %>
-            <%= form.text_field :name, class: 'form-control' %>
-          </div>
-
-          <div class="col-md-6 mb-3">
-            <%= form.label :lastname, "Last Name", class: "form-label" %>
-            <%= form.text_field :lastname, class: 'form-control' %>
-          </div>
-
-        </div>
-
-        <div class="row">
-
-          <div class="col-md-6 mb-3">
-            <%= form.label :dni, "DNI", class: "form-label" %>
-            <%= form.text_field :dni, class: 'form-control' %>
-          </div>
-
-          <div class="col-md-6 mb-3">
-            <%= form.label :phone, "Phone", class: "form-label" %>
-            <%= form.text_field :phone, class: 'form-control' %>
-          </div>
-          
-        </div>
-      </div>
+      <%=link_to "Add new client" , new_client_path , class:"btn btn-primary mb-3" %>
     </div>
 
   </div>
