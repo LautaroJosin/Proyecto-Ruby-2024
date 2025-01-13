@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   resources :product_sales
 
   # Client routes
-  post "/clients" => "clients#create"
+  resources :clients, only: [ :new, :create ]
 
   # Category and product routes
   resources :categories
