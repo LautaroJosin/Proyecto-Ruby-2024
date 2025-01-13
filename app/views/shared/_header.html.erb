@@ -27,17 +27,25 @@
           </ul>
         </li>
         
-        
-
         <!-- Falta validaciones de CanCanCan -->
-        <li class="nav-item">
-          <%= link_to 'Clients', clients_path, class: 'nav-link' %>
+        <!-- Falta validaciones de CanCanCan -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Sales
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <% if can? :read, Product %>
+              <li class="nav-item">
+                <li><a class="dropdown-item" href=<%=sales_path%>>Sales list</a></li>    
+              </li>
+            <% end %>
+
+              <li class="nav-item">
+                <li><a class="dropdown-item" href=<%=clients_path%>>Clients</a></li>    
+              </li>
+          </ul>
         </li>
 
-        <!-- Falta validaciones de CanCanCan -->
-        <li class="nav-item">
-          <%= link_to 'Sales', sales_path, class: 'nav-link' %>
-        </li>
 
         <% if can? :read, User %>
         <li class="nav-item">
