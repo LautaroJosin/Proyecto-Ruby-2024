@@ -37,9 +37,15 @@
             <td><%= sale.user.username %></td>
             <td><%= sale.client.name %></td>
             <td>
-                <%= link_to 'Details', sale_path(sale), class: 'btn btn-info btn-sm' %>
-                <%= link_to 'Edit', edit_sale_path(sale), class: 'btn btn-warning btn-sm' %>
-                <%= link_to 'Delete', sale_path(sale), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+                <div class="d-flex">
+                    <% if sale.active %>
+                        <%= button_to 'Cancel' , cancel_sale_path(sale) , method: :patch, class: 'btn btn-danger btn-sm'%>
+                    <% else %>
+                        <!-- Fix this -->
+                    <% end %>
+                    <%= link_to 'Edit', edit_sale_path(sale), class: 'btn btn-warning btn-sm' %>
+                    <%= link_to 'Delete', sale_path(sale), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+                </div>
             </td>
             </tr>
         <% end %>
