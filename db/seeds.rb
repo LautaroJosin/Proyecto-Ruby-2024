@@ -35,22 +35,28 @@ end
 puts "Categories created successfully!"
 
 
-# categories = Category.all
+categories = Category.all
 
-# 10.times do
-#   Product.create!(
-#     name: Faker::Commerce.product_name,  # Nombre del producto generado aleatoriamente
-#     description: Faker::Lorem.sentence,   # Descripción generada aleatoriamente
-#     price: Faker::Commerce.price(range: 10..500.0),  # Precio aleatorio entre 10 y 500
-#     stock: rand(1..100),  # Stock aleatorio entre 1 y 100
-#     deleted_at: nil,  # Aseguramos que deleted_at sea null
-#     category: categories.sample,  # Asignamos una categoría aleatoria
-#     size: [ 'S', 'M', 'L', 'XL', 'XXL' ].sample,  # Tamaño aleatorio
-#     color: Faker::Color.color_name  # Color generado aleatoriamente
-#   )
-# end
-#
-# puts "Products created successfully!"
+10.times do
+  product = Product.new(
+    name: Faker::Commerce.product_name,
+    description: Faker::Lorem.sentence,
+    price: Faker::Commerce.price(range: 10..500.0),
+    stock: rand(1..100),
+    deleted_at: nil,
+    category: categories.sample,
+    size: [ 'S', 'M', 'L', 'XL', 'XXL' ].sample,
+    color: Faker::Color.color_name,
+  )
+  product.images.attach(
+    io: File.open(Rails.root.join("public/ropa.jpg")),
+    filename: "ropa.jpg",
+    content_type: "image/jpeg"
+    )
+  product.save!
+end
+
+puts "Products created successfully!"
 
 
 User.create!(
