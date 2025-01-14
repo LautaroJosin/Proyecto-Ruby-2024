@@ -19,23 +19,34 @@
   <!-- Resultados de la búsqueda y filtro -->
   <div id="products">
     <% if @products.present? %>
-      <ul class="list-unstyled">
+      <div class="row">
         <% @products.each do |product| %>
-          <li class="mb-3">
-            <h5><%= product.name %></h5>
-            <p><%= product.category.name %></p>
-            <p><%= number_to_currency(product.price) %></p>
-            <p><%= product.description %></p> <!-- Descripción del producto -->
-            <hr> <!-- Separador entre productos -->
-          </li>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <!-- Imagen del producto -->
+              <% if product.images.attached? %>
+                <%= image_tag product.images.first, class: "card-img-top", alt: product.name %>
+              <% else %>
+                <%= image_tag "default_product.jpg", class: "card-img-top", alt: "Default product image" %>
+              <% end %>
+              
+              <div class="card-body">
+                <h5 class="card-title text-primary"><%= product.name %></h5>
+                <p class="card-text"><strong>Category:</strong> <%= product.category.name %></p>
+                <p class="card-text"><strong>Price:</strong> <%= number_to_currency(product.price) %></p>
+                <p class="card-text"><strong>Description:</strong> <%= product.description %></p>
+                <p class="card-text"><strong>Stock:</strong> <%= product.stock %> available</p>
+              </div>
+            </div>
+          </div>
         <% end %>
-      </ul>
+      </div>
     <% else %>
       <p class="text-center">No products found.</p>
     <% end %>
   </div>
-
 </div>
+
 
 
 
