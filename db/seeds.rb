@@ -37,16 +37,16 @@ puts "Categories created successfully!"
 
 categories = Category.all
 
-10.times do
+15.times do
   product = Product.new(
-    name: Faker::Commerce.product_name,
+    name: "#{Faker::Sports::Basketball.team} #{[ 'Jersey', 'Shorts', 'Sneakers', 'Tracksuit', 'Cap' ].sample}",
     description: Faker::Lorem.sentence,
-    price: Faker::Commerce.price(range: 10..500.0),
+    price: [ *10..500 ].select { |n| n % 5 == 0 }.sample,
     stock: rand(1..100),
     deleted_at: nil,
     category: categories.sample,
     size: [ 'S', 'M', 'L', 'XL', 'XXL' ].sample,
-    color: Faker::Color.color_name,
+    color: [ 'Red', 'Blue', 'Green', 'White', 'Black' ].sample,
   )
   product.images.attach(
     io: File.open(Rails.root.join("public/ropa.jpg")),
