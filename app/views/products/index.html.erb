@@ -21,7 +21,9 @@
           <th>Size</th>
           <th>Stock</th>
           <th>Images</th>
-          <th>Actions</th> 
+          <% if can? :edit, Product and can? :destroy, Product %>
+            <th>Actions</th>
+          <% end %>
         </tr>
       </thead>
 
@@ -40,16 +42,18 @@
             <% else %>
               <td>No Image</td>
             <% end %>
-            <td>
-              <div class="d-flex">
-                <% if can? :edit, product %>
-                  <%= link_to 'Edit', edit_product_path(product), class: 'btn btn-warning btn-sm' %>
-                <% end %>
-                <% if can? :destroy, product %>
-                  <%= button_to "Delete", product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-                <% end %>
-              </div>
-            </td> 
+            <% if can? :update, Product and can? :destroy, Product %>
+              <td>
+                <div class="d-flex">
+                  <% if can? :edit, product %>
+                    <%= link_to 'Edit', edit_product_path(product), class: 'btn btn-warning btn-sm' %>
+                  <% end %>
+                  <% if can? :destroy, product %>
+                    <%= button_to "Delete", product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+                  <% end %>
+                </div>
+              </td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
