@@ -7,7 +7,8 @@ class Ability
     if user.nil? # user is a guest
       cannot :manage, User
       cannot :manage, Product
-      can :read, Product
+      cannot :manage, Sale
+      cannot :manage, :Category
 
     else
 
@@ -16,12 +17,18 @@ class Ability
 
       elsif user.is_manager?
         can :manage, Product
+        can :manage, Category
+        can :manage, Sale
+        can :manage, Client
         can :manage, User
         cannot :update, User, { role_int: "admin" }
         cannot :create, User, { role_int: "admin" }
 
       elsif user.is_employee?
         can :manage, Product
+        can :manage, Category
+        can :manage, Sale
+        can :manage, Client
         cannot :manage, User
       end
     end

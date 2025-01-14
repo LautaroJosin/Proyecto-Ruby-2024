@@ -9,42 +9,47 @@
           <%= link_to 'Home', root_path, class: 'nav-link' %>
         </li>
 
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Products
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <% if can? :read, Product %>
+                <li class="nav-item">
+                  <li><a class="dropdown-item" href=<%=products_path%>>Products list</a></li>    
+                </li>
+              <% end %>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Products
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <% if can? :read, Product %>
-              <li class="nav-item">
-                <li><a class="dropdown-item" href=<%=products_path%>>Products list</a></li>    
-              </li>
-            <% end %>
-
-              <li class="nav-item">
-                <li><a class="dropdown-item" href=<%=categories_path%>>Categories</a></li>    
-              </li>
-          </ul>
-        </li>
+              <% if can? :read, Category %>
+                <li class="nav-item">
+                  <li><a class="dropdown-item" href=<%=categories_path%>>Categories</a></li>    
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
         
-        <!-- Falta validaciones de CanCanCan -->
-        <!-- Falta validaciones de CanCanCan -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Sales
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <% if can? :read, Product %>
-              <li class="nav-item">
-                <li><a class="dropdown-item" href=<%=sales_path%>>Sales list</a></li>    
-              </li>
-            <% end %>
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Sales
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <% if can? :read, Sale %>
+                <li class="nav-item">
+                  <li><a class="dropdown-item" href=<%=sales_path%>>Sales list</a></li>    
+                </li>
+              <% end %>
 
-              <li class="nav-item">
-                <li><a class="dropdown-item" href=<%=clients_path%>>Clients</a></li>    
-              </li>
-          </ul>
-        </li>
+              <% if can? :read, Client%>
+                <li class="nav-item">
+                  <li><a class="dropdown-item" href=<%=clients_path%>>Clients</a></li>    
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
 
 
         <% if can? :read, User %>
@@ -52,10 +57,7 @@
           <%= link_to 'Users', users_path, class: 'nav-link' %>
         </li>
         <% end %>
-
-        <!-- Menú Desplegable -->
         
-
       </ul>
 
       <% if user_signed_in? %>
