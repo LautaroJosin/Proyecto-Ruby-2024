@@ -1,6 +1,7 @@
 class SalesController < ApplicationController
   def index
     @sales = Sale.all
+    authorize! :read, Sale
   end
 
   def new
@@ -11,6 +12,7 @@ class SalesController < ApplicationController
       render :set_products_amount
     else
       @sale = Sale.new
+      authorize! :create, Sale
       @product_amount.times { @sale.product_sale.build }
     end
   end
@@ -20,6 +22,7 @@ class SalesController < ApplicationController
   # 2. The stock of the products included in the sale will be updated
   # If any of the steps fails, the transaction will be rolled back
   def create
+    authorize! :create, Sale
     ActiveRecord::Base.transaction do
       @sale = Sale.new(sale_params)
 
@@ -67,6 +70,7 @@ class SalesController < ApplicationController
   end
 
   def cancel
+    authorize! :update, Sale
     @sale = Sale.find(params[:id])
     if @sale.active == false
       return redirect_to sales_path, notice: "The sale is already canceled"
