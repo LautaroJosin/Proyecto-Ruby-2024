@@ -1,57 +1,58 @@
 <div class="container mt-4">
   <h1 class="text-center text-primary mb-4">Sales List</h1>
 
-    <!-- Falta validaciones de CanCanCan -->
+  <!-- Falta validaciones de CanCanCan -->
 
+<% if can? :create, Sale %>
     <div class="text-end mb-3">
-        <%= link_to 'Add new sale', set_products_amount_sales_path, class: 'btn btn-success' %>
+    <%= link_to 'Add new sale', set_products_amount_sales_path, class: 'btn btn-success' %>
     </div>
+<% end %>
 
-    <p class="mb-4">Sales count: <%= @sales.count %></p>
+  <p class="mb-4">Sales count: <%= @sales.count %></p>
 
-    <% if @sales.count > 0 %>
+  <% if @sales.count > 0 %>
     <table class="table table-striped table-bordered">
-        <thead class="table-dark">
+      <thead class="table-dark">
         <tr>
-            <th>Date & Time</th>
-            <th>Products</th>
-            <th>Total</th>
-            <th>Employee</th>
-            <th>Client</th>
-            <th>Actions</th>
+          <th>Date & Time</th>
+          <th>Products</th>
+          <th>Total</th>
+          <th>Employee</th>
+          <th>Client</th>
+          <th>Actions</th>
         </tr>
-        </thead>
+      </thead>
 
-        <tbody>
+      <tbody>
         <% @sales.each do |sale| %>
-            <tr>
+          <tr class="<%= 'table-secondary' unless sale.active %>">
             <td><%= sale.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
             <td>
-                <% sale.product_sale.each do |ps| %>
+              <% sale.product_sale.each do |ps| %>
                 <p>
-                    <%= ps.product.name %> - Quantity: <%= ps.quantity %> - Price: <%= number_to_currency(ps.product.price) %>
+                  <%= ps.product.name %> - Quantity: <%= ps.quantity %> - Price: <%= number_to_currency(ps.product.price) %>
                 </p>
-                <% end %>
+              <% end %>
             </td>
             <td><%= number_to_currency(sale.total_price) %></td>
             <td><%= sale.user.username %></td>
             <td><%= sale.client.name %></td>
             <td>
-                <div class="d-flex">
+              <div class="d-flex">
+                <% if can? :edit, Sale %>
                     <% if sale.active %>
-                        <%= button_to 'Cancel' , cancel_sale_path(sale) , method: :patch, class: 'btn btn-danger btn-sm'%>
-                    <% else %>
-                        <!-- Fix this -->
+                        <%= button_to 'Cancel', cancel_sale_path(sale), method: :patch, class: 'btn btn-danger btn-sm' %>
                     <% end %>
-                    <%= link_to 'Edit', edit_sale_path(sale), class: 'btn btn-warning btn-sm' %>
-                    <%= link_to 'Delete', sale_path(sale), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-                </div>
+                <% end %>
+              </div>
             </td>
-            </tr>
+          </tr>
         <% end %>
-        </tbody>
+      </tbody>
     </table>
-    <% else %>
+  <% else %>
     <p class="text-center text-danger">There are no sales to show</p>
-    <% end %>
-    </div>
+  <% end %>
+</div>
+
