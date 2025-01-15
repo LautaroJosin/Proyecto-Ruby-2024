@@ -21,10 +21,9 @@ class Ability
         can :manage, Sale
         can :manage, Client
         can :manage, User
-        can [ :deactivate, :activate ], User
         cannot :update, User, { role_int: "admin" }
         cannot :create, User, { role_int: "admin" }
-        cannot [ :deactivate, :activate ], User, { role_int: "admin" }
+        cannot [ :deactivate, :activate ], User
 
       elsif user.is_employee?
         can :manage, Product
