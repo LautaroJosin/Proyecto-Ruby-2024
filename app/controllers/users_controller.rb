@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   def index
+    authorize! :index, User
     @users = User.where.not(id: current_user.id)
     @current_user = current_user
-    authorize! :index, User
   end
 
   def show
