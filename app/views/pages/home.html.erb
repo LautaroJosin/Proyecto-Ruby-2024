@@ -4,12 +4,18 @@
   
   <!-- Formulario de búsqueda y filtro -->
   <div class="d-flex justify-content-center mb-4">
-    <%= form_with url: root_path, method: :get, local: true, class: "d-flex" do %>
+    <%= form_with url: root_path, method: :get, local: true, class: "d-flex align-items-center gap-2" do %>
       <!-- Campo de búsqueda por nombre de producto -->
-      <%= text_field_tag :search, params[:search], placeholder: "Search for products", class: "form-control me-2", aria: { label: "Search for products" } %>
+      <%= text_field_tag :search, params[:search], 
+        placeholder: "Search for products", 
+        class: "form-control", 
+        aria: { label: "Search for products" } %>
 
       <!-- Filtro por categoría -->
-      <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), prompt: "Select category", class: "form-select me-2" %>
+      <%= select_tag :category_id, 
+        options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), 
+        prompt: "Select category", 
+        class: "form-select" %>
 
       <!-- Botón de búsqueda -->
       <%= submit_tag "Search", class: "btn btn-primary" %>
@@ -19,22 +25,20 @@
   <!-- Resultados de la búsqueda y filtro -->
   <div id="products">
     <% if @products.present? %>
-      <div class="row">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         <% @products.each do |product| %>
-          <div class="col-md-4 mb-4">
-            <div class="card">
+          <div class="col">
+            <div class="card h-100">
               <!-- Imagen del producto -->
-              <% if product.images.attached? %>
-                <%= image_tag product.images.first, class: "card-img-top", alt: product.name %>
-              <% else %>
-                <%= image_tag "default_product.jpg", class: "card-img-top", alt: "Default product image" %>
-              <% end %>
+              <%= image_tag(product.images.attached? ? product.images.first : "default_product.jpg", 
+                class: "card-img-top", 
+                alt: product.name) %>
               
               <div class="card-body">
                 <h5 class="card-title text-primary"><%= product.name %></h5>
-                <p class="card-text"><strong>Category:</strong> <%= product.category.name %></p>
+                <p class="card-text"><strong>Category:</strong> <%= product.category&.name || "Uncategorized" %></p>
                 <p class="card-text"><strong>Price:</strong> <%= number_to_currency(product.price) %></p>
-                <p class="card-text"><strong>Description:</strong> <%= product.description %></p>
+                <p class="card-text"><strong>Description:</strong> <%= truncate(product.description, length: 100) %></p>
                 <p class="card-text"><strong>Stock:</strong> <%= product.stock %> available</p>
               </div>
             </div>
@@ -42,11 +46,10 @@
         <% end %>
       </div>
     <% else %>
-      <p class="text-center">No products found.</p>
+      <p class="text-center text-muted">No products found.</p>
     <% end %>
   </div>
 </div>
-
 
 
 
