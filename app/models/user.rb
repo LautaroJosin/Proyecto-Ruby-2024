@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   enum :role_int, admin: 0, manager: 1, employee: 2
-  # before_create :set_joined_at
-  # before_update :check_if_active_changed
+  before_create :set_joined_at
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -32,5 +31,10 @@ class User < ApplicationRecord
 
   def is_employee?
     role_int == "employee"
+  end
+
+  private
+  def set_joined_at
+    self.joined_at = Time.current unless joined_at
   end
 end
