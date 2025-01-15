@@ -40,10 +40,14 @@
             <div class="d-flex">
 
               <% if user.is_active %>
-                <%= button_to 'Deactivate', deactivate_user_path(user), method: :patch, class: 'btn btn-danger btn-sm me-2' %>
+                <% if can? :deactivate, user %>
+                  <%= button_to 'Deactivate', deactivate_user_path(user), method: :patch, class: 'btn btn-danger btn-sm me-2' %>
+                <% end %>
               <% else %>
 
-                <%= button_to 'Activate', activate_user_path(user), method: :patch, class: 'btn btn-success btn-sm me-2' %>
+                <% if can? :activate, user %>
+                  <%= button_to 'Activate', activate_user_path(user), method: :patch, class: 'btn btn-success btn-sm me-2' %>
+                <% end %>
               <% end %>
 
               <% if can? :update, user %>

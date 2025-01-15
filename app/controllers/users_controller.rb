@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   def index
     @users = User.where.not(id: current_user.id)
     @current_user = current_user
+    authorize! :index, User
   end
 
   def show
@@ -9,6 +10,7 @@ class UsersController < ApplicationController
     if @user.nil?
         content_not_found
     end
+    authorize! :show, @user
   end
 
   def edit
@@ -20,7 +22,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize! :update, @user
     if @user.update(user_params)
-      redirect_to users_path, notice: "User updated"
+      redirect_to root_path, notice: "User updated"
     else
       flash.now[:alert] = @user.errors.full_messages.join(", ")
       render :edit
@@ -29,12 +31,14 @@ class UsersController < ApplicationController
 
   def deactivate
     @user = User.find(params[:id])
+    authorize! :deactivate, @user
     @user.deactivate!
     redirect_to users_path, notice: "User deactivated"
   end
 
   def activate
     @user = User.find(params[:id])
+    authorize! :activate, @user
     @user.activate!
     redirect_to users_path, notice: "User activated"
   end

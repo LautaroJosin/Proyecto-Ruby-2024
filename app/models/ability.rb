@@ -21,15 +21,21 @@ class Ability
         can :manage, Sale
         can :manage, Client
         can :manage, User
+        can [ :deactivate, :activate ], User
         cannot :update, User, { role_int: "admin" }
         cannot :create, User, { role_int: "admin" }
+        cannot [ :deactivate, :activate ], User, { role_int: "admin" }
 
       elsif user.is_employee?
         can :manage, Product
         can :manage, Category
         can :manage, Sale
         can :manage, Client
-        cannot :manage, User
+
+        cannot :index, User
+        cannot :create, User
+        cannot :destroy, User
+        can [ :show, :edit, :update ], User, id: user.id
       end
     end
   end
