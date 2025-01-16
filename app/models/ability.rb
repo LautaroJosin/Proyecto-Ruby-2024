@@ -9,6 +9,7 @@ class Ability
       cannot :manage, Product
       cannot :manage, Sale
       cannot :manage, :Category
+      cannot :manage, :Client
 
     else
 

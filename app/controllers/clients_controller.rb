@@ -1,12 +1,15 @@
 class ClientsController < ApplicationController
   def index
+    authorize! :index, Client
     @clients = Client.all
   end
   def new
+    authorize! :new, Client
     @client = Client.new
   end
 
   def create
+    authorize! :create, Client
     @client = Client.new(client_params)
     if @client.save
       redirect_to set_products_amount_sales_path(client_id: @client.id), notice: "Client #{@client.name} #{@client.lastname} was successfully created."
@@ -18,6 +21,7 @@ class ClientsController < ApplicationController
 
   def destroy
     @client = Client.find(params[:id])
+    authorize! :destroy, @client
     @client.destroy
     flash.now[:notice] = "Client was successfully deleted"
     redirect_to clients_path
