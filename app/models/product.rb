@@ -3,8 +3,8 @@ class Product < ApplicationRecord
     belongs_to :category
 
     validates :name, presence: true
-    validates :price, presence: true
-    validates :stock, presence: true
+    validates :price, presence: true, numericality: { greater_than: 0, message: "must be a positive number" }
+    validates :stock, presence: true, numericality: { greater_than_or_equal_to: 0, message: "must be zero or a positive number" }
     validates :category, presence: true
 
     validate :must_have_at_least_one_image, on: :create
@@ -16,7 +16,7 @@ class Product < ApplicationRecord
     private
     def must_have_at_least_one_image
         unless images.attached?
-            errors.add(:images, "must have at least one image")
+            errors.add(:product, "must have at least one image")
         end
     end
 end

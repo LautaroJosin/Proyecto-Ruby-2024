@@ -23,6 +23,7 @@ class ProductsController < ApplicationController
         if @product.save
           redirect_to products_path, notice: "Product saved correctly"
         else
+            flash.now[:alert] = @product.errors.full_messages.join(", ")
             render :new, status: :unprocessable_entity
         end
     end
@@ -38,9 +39,8 @@ class ProductsController < ApplicationController
         if @product.update(product_params)
             redirect_to products_path, notice: "Product updated correctly"
         else
-            flash.now[:alert] = "An error has ocurred when updating the product"
+            flash.now[:alert] = @product.errors.full_messages.join(", ")
             render :edit, status: :unprocessable_entity
-            nil
         end
     end
 
