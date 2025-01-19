@@ -24,12 +24,12 @@
 
     <div>
         <%= form.label :size %>
-        <%= form.select :size, ["S", "M", "L"], include_blank: true  %>
+        <%= form.text_field :size %>
     </div>
 
     <div>
         <%= form.label :color %>
-        <%= form.select :color, ["Red", "Blue", "Green"], include_blank: true  %>
+        <%= form.select :color, ["Red", "Blue", "Green", "Black", "White"], { include_blank: true } %>
     </div>
 
     <div>
@@ -48,13 +48,6 @@
         <%= form.file_field :images, multiple: true %>
 
     </div>
-
-<!-- Deleting images from product incomplete -->
-    <div>
-        <%= form.label 'Images to remove' %>
-
-    </div>
-
 
     <%= form.submit %>
 
