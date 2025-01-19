@@ -1,27 +1,32 @@
-<h1>Add new client</h1>
+<div class="container mt-5">
+  <h1 class="text-center text-primary mb-4">Add New Client</h1>
 
-<%= form_with model: @client do |form| %>
-
-    <div>
-        <%= form.label :name %>
-        <%= form.text_field :name %>
+  <%= form_with model: @client, class: 'needs-validation' do |form| %>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= form.label :name, class: 'form-label' %>
+        <%= form.text_field :name, class: 'form-control', placeholder: 'e.g., John' %>
+      </div>
+      <div class="col-md-6">
+        <%= form.label :lastname, class: 'form-label' %>
+        <%= form.text_field :lastname, class: 'form-control', placeholder: 'e.g., Doe' %>
+      </div>
     </div>
 
-    <div>
-        <%= form.label :lastname %>
-        <%= form.text_field :lastname %>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= form.label :dni, class: 'form-label' %>
+        <%= form.text_field :dni, class: 'form-control', placeholder: 'e.g., 12345678' %>
+      </div>
+      <div class="col-md-6">
+        <%= form.label :phone, class: 'form-label' %>
+        <%= form.text_field :phone, class: 'form-control', placeholder: 'e.g., 123-456-7890' %>
+      </div>
     </div>
 
-    <div>
-        <%= form.label :dni %>
-        <%= form.text_field :dni %>
+    <div class="d-grid gap-2">
+      <%= form.submit "Create Client", class: 'btn btn-primary btn-lg' %>
     </div>
+  <% end %>
+</div>
 
-    <div>
-        <%= form.label :phone %>
-        <%= form.text_field :phone %>
-    </div>
-
-    <%= form.submit "Create Client" %>
-
-<% end %>

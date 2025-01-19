@@ -14,8 +14,8 @@ class ClientsController < ApplicationController
     if @client.save
       redirect_to set_products_amount_sales_path(client_id: @client.id), notice: "Client #{@client.name} #{@client.lastname} was successfully created."
     else
-      pp @client.errors.full_messages
-      render :new
+      flash.now[:alert] = @client.errors.full_messages.join(", ")
+      render :new, status: :unprocessable_entity
     end
   end
 
