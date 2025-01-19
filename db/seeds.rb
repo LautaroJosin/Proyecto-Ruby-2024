@@ -65,6 +65,7 @@ User.create!(
   password: "123456",
   phone: "1234567890",
   role_int: "admin",
+  joined_at: Time.now,
   is_active: true
 )
 
@@ -74,6 +75,7 @@ User.create!(
   password: "123456",
   phone: "1234567890",
   role_int: "employee",
+  joined_at: Time.now,
   is_active: true
 )
 
@@ -83,6 +85,7 @@ User.create!(
   password: "123456",
   phone: "1234567890",
   role_int: "manager",
+  joined_at: Time.now,
   is_active: true
 )
 
