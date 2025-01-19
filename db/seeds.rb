@@ -96,7 +96,7 @@ puts "Users created successfully!"
   Client.create!(
     name: Faker::Name.first_name,
     lastname: Faker::Name.last_name,
-    dni: Faker::IdNumber.spanish_citizen_number,
+    dni: Faker::Number.number(digits: 8),
     phone: Faker::PhoneNumber.cell_phone
   )
 end
