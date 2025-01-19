@@ -48,7 +48,7 @@ class ProductsController < ApplicationController
     def destroy
         @product = Product.find(params[:id])
         authorize! :destroy, @product
-        @product.destroy
+        @product.soft_delete
         redirect_to products_path, notice: "Product deleted correctly", status: :see_other
     end
 

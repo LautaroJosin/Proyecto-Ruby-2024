@@ -9,6 +9,10 @@ class Product < ApplicationRecord
 
     validate :must_have_at_least_one_image, on: :create
 
+    def soft_delete
+        self.update(stock: 0, deleted_at: DateTime.now)
+    end
+
     private
     def must_have_at_least_one_image
         unless images.attached?
