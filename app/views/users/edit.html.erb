@@ -20,8 +20,19 @@
       </div>
     </div>
 
-    <div class="mb-3">
-      <%= link_to 'Change password', edit_user_password_path, class: 'btn btn-warning' %>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= form.label :password, "New password", class: 'form-label' %>
+        <% if @minimum_password_length %>
+          <em class="text-muted d-block mb-2">(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <%= form.password_field :password, class: 'form-control', placeholder: 'Enter new password', autocomplete: "new-password" %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.label :password_confirmation, "Confirm new password", class: 'form-label' %>
+        <%= form.password_field :password_confirmation, class: 'form-control', placeholder: 'Re-enter new password', autocomplete: "new-password" %>
+      </div>
     </div>
 
     <div class="d-grid gap-2">
@@ -29,4 +40,5 @@
     </div>
   <% end %>
 </div>
+
 
