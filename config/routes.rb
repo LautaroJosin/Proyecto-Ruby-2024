@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "home", to: "pages#home"
 
   # Session and registration routes
-  devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords" }
+  devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
 
   # User routes
   resources :users, only: [ :index, :edit, :update, :show ] do

@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
   validates :phone, presence: true, format: { with: /\A(\+?\d{1,3}[-.\s]?)?(\(?\d{2,3}\)?[-.\s]?)?(\d{3}[-.\s]?\d{4})\z/, message: "must be a valid phone number" }
   validates :role_int, inclusion: { in: role_ints.keys.map { |role| role.to_s }, message: "%{value} Role invalido." }
+  validates :password, presence: true, length: { minimum: 6 }, if: :password_required?
 
   def deactivate!
     update(is_active: false, password: Devise.friendly_token[0, 6])
@@ -36,5 +37,9 @@ class User < ApplicationRecord
   private
   def set_joined_at
     self.joined_at = Time.current unless joined_at
+  end
+
+  def password_required?
+    new_record? || password.present?
   end
 end
