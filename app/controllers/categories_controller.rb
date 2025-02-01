@@ -3,6 +3,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories or /categories.json
   def index
+    authorize! :read, Category
     @categories = Category.all
   end
 
@@ -13,6 +14,7 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = Category.new
+    authorize! :create, @category
   end
 
   # GET /categories/1/edit
@@ -22,6 +24,7 @@ class CategoriesController < ApplicationController
   # POST /categories or /categories.json
   def create
     @category = Category.new(category_params)
+    authorize! :create, @category
 
     respond_to do |format|
       if @category.save
@@ -49,12 +52,22 @@ class CategoriesController < ApplicationController
 
   # DELETE /categories/1 or /categories/1.json
   def destroy
-    @category.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to categories_path, status: :see_other, notice: "Category was successfully destroyed." }
-      format.json { head :no_content }
+    @category = Category.find(params[:id])
+    authorize! :destroy, @category
+    if @category.destroy
+      flash[:notice] = "Category was successfully deleted"
+      redirect_to categories_path
+    else
+      flash[:alert] = "It was not possible to delete this category because it has products associated"
+      @categories = Category.all
+      render :index
     end
+    # @category.destroy!
+
+    # respond_to do |format|
+    #   format.html { redirect_to categories_path, status: :see_other, notice: "Category was successfully destroyed." }
+    #   format.json { head :no_content }
+    # end
   end
 
   private
