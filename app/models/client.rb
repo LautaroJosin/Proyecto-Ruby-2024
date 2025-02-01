@@ -1,5 +1,5 @@
 class Client < ApplicationRecord
-  has_many :ventas
+  has_many :sales, dependent: :restrict_with_error
 
   validates :phone, presence: true, format: { with: /\A(\+?\d{1,3}[-.\s]?)?(\(?\d{2,3}\)?[-.\s]?)?(\d{3}[-.\s]?\d{4})\z/, message: "must be a valid phone number" }
   validates :name, presence: true
