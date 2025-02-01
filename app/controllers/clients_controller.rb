@@ -20,8 +20,8 @@ class ClientsController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, @client
     @client = Client.find(params[:id])
+    authorize! :destroy, @client
     if @client.destroy
       flash[:notice] = "Client was successfully deleted"
       redirect_to clients_path

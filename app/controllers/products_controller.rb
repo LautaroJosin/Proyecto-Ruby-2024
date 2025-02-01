@@ -36,6 +36,7 @@ class ProductsController < ApplicationController
     # Fixme: This method is not updating the images of the product
     def update
         @product = Product.find_by(id: params[:id])
+        authorize! :update, @product
         if @product.update(product_params)
             redirect_to products_path, notice: "Product updated correctly"
         else
