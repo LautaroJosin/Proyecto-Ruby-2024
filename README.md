@@ -50,3 +50,11 @@ Para iniciar el servidor de desarrollo:
 
 ```sh
 rails server
+```
+
+## Decisiones de diseño
+
+- Cuando un usuario es desactivado y activado nuevamente, le seteo *new-password* como contraseña
+- Los roles de usuario que pueden administrar ventas pueden tambien administrar clientes
+- Los roles de usuario que pueden administrar products pueden tambien administrar categories
+- No será posible eliminar un cliente con ventas asociadas
