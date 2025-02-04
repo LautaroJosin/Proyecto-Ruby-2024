@@ -5,4 +5,10 @@ class ApplicationController < ActionController::Base
   def content_not_found
     render file: "#{Rails.root}/public/404.html", layout: true, status: :not_found
   end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    respond_to do |format|
+      format.html { redirect_to root_path, alert: "You don't have permissions to complete this action." }
+    end
+  end
 end
