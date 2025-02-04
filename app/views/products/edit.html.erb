@@ -41,7 +41,9 @@
     </div>
 
     <% @product.images.each do |image| %>
-      <%= form.hidden_field :images, multiple: true, value: image.signed_id %>
+      <% if image.persisted? %>
+        <%= form.hidden_field :images, multiple: true, value: image.signed_id %>
+      <% end %>
     <% end %>
 
     <div class="mb-3">
