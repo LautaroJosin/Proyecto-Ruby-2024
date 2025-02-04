@@ -6,6 +6,7 @@ class Product < ApplicationRecord
     validates :price, presence: true, numericality: { greater_than: 0, message: "must be a positive number" }
     validates :stock, presence: true, numericality: { greater_than_or_equal_to: 0, message: "must be zero or a positive number" }
     validates :category, presence: true
+    validates :images, content_type: [ "image/png", "image/jpeg" ]
 
     validate :must_have_at_least_one_image, on: :create
 
